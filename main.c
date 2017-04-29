@@ -14,12 +14,12 @@ int main() {
   init_QTR_driver();
 
   DDRC = 0xFF;
-
+  unsigned char checkSensorValue = get_QTR_value() & 0x0F;
   while (1) {
 
     //Get Sensor Values
     _delay_ms(1);
-    unsigned char checkSensorValue = get_QTR_value() & 0x0F; //Only using B(3:0)
+    checkSensorValue = get_QTR_value() & 0x0F; //Only using B(3:0)
     PORTC = checkSensorValue; //allows to check if sensors are outputting correctly on C
     //	d0 = rightmost sensor
 	  //  d1 = right center sensor
