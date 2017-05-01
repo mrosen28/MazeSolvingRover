@@ -11,9 +11,9 @@ int main() {
 
   while (1) {
 
-    unsigned char checkSensorValue = get_QTR_value() & 0x07;// & 0x0F; //Only using B(3:0) "***-----"
+    unsigned char checkSensorValue = get_QTR_value() & 0x03;// & 0x0F; //Only using B(3:0) "***-----"
 
-    if(checkSensorValue == 0x04){ // "*00-----" = 0000 0100
+    if(checkSensorValue == 0x02){ //black on left, white on right
       leftmotor_forward();
       rightmotor_forward();
       _delay_ms(2);
@@ -21,7 +21,7 @@ int main() {
       rightmotor_brake();
       _delay_ms(1);
     }
-    else if(checkSensorValue == 0x00){
+    else if(checkSensorValue == 0x00){//white on both
       leftmotor_coast();
       rightmotor_forward();
       _delay_ms(2);
@@ -29,18 +29,16 @@ int main() {
       rightmotor_brake();
       _delay_ms(1);
     }
-    else if(checkSensorValue == 0x06){
+    else if(checkSensorValue == 0x03){//black on both
       leftmotor_forward();
-      rightmotor_coast();
+      rightmotor_reverse();
       _delay_ms(2);
       leftmotor_brake();
       rightmotor_brake();
       _delay_ms(1);
     }
-    else if(checkSensorValue == 0x07){
-      while(checkSensorValue != 0x04){
-        checkSensorValue = get_QTR_value() & 0x07;
-        leftmotor_reverse();
+    else if(checkSensorValue == 0x01){ //white on left, black on right
+        leftmotor_coast();
         rightmotor_forward();
         _delay_ms(2);
         leftmotor_brake();
@@ -49,7 +47,7 @@ int main() {
 
       }
     }
-}
+
 
   return 0;
 }
