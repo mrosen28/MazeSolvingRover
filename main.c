@@ -38,8 +38,8 @@ int main() {
       _delay_ms(1);
     }
     else if(checkSensorValue == 0x01){ //white on left, black on right
-        leftmotor_coast();
-        rightmotor_forward();
+        leftmotor_forward();
+        rightmotor_coast();
         _delay_ms(2);
         leftmotor_brake();
         rightmotor_brake();
