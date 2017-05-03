@@ -16,15 +16,15 @@ int main() {
     if(checkSensorValue == 0x02){ //black on left, white on right
       leftmotor_forward();
       rightmotor_forward();
-      _delay_ms(2);
+      _delay_ms(1);
       leftmotor_brake();
       rightmotor_brake();
       _delay_ms(1);
     }
     else if(checkSensorValue == 0x00){//white on both
-      leftmotor_coast();
+      leftmotor_reverse();
       rightmotor_forward();
-      _delay_ms(2);
+      _delay_ms(1);
       leftmotor_brake();
       rightmotor_brake();
       _delay_ms(1);
@@ -39,12 +39,11 @@ int main() {
     }
     else if(checkSensorValue == 0x01){ //white on left, black on right
         leftmotor_forward();
-        rightmotor_coast();
+        rightmotor_reverse();
         _delay_ms(2);
         leftmotor_brake();
         rightmotor_brake();
         _delay_ms(1);
-
       }
     }
 
